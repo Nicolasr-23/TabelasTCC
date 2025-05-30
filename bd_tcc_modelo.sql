@@ -14,7 +14,7 @@ CREATE TABLE Usuario
    nome          VARCHAR(100)	NOT NULL,
    email         VARCHAR(100)	UNIQUE NOT NULL,
    senha         VARCHAR(100)	NOT NULL,
-   nivelAcesso   VARCHAR(10)    NULL, -- ADMIN ou USER
+   nivelAcesso   VARCHAR(10)    NULL, -- ADMIN ou ALUNO ou EMPRESA
    foto			 VARBINARY(MAX) NULL,
    dataCadastro	 SMALLDATETIME	NOT NULL,
    statusUsuario VARCHAR(20)    NOT NULL, -- ATIVO ou INATIVO ou TROCAR_SENHA
@@ -38,15 +38,14 @@ SELECT * FROM Usuario
 
 CREATE TABLE Aluno
 (
-	id_Aluno		INT				IDENTITY,
+	id	INT			IDENTITY,
 	nome			VARCHAR(100)	NOT NULL,
 	rm				VARCHAR(100)	UNIQUE NOT NULL,
-	senha			VARCHAR(100)	NOT NULL,
-	foto			VARBINARY(MAX)	NULL,
+
 	dataCadastro	SMALLDATETIME	NOT NULL,
 	statusAluno		VARCHAR(20)		NOT NULL,
 
-	PRIMARY KEY (id_Aluno)
+	PRIMARY KEY (id)
 )
 GO
 INSERT Aluno (nome, rm, senha, foto, dataCadastro, statusAluno)
@@ -60,39 +59,14 @@ VALUES ('Jorge da Silva', 'rm12345', 'MTIzNDU2Nzg=', NULL, GETDATE(), 'ATIVO')
 
 GO
 
-SELECT * FROM Aluno
 
-CREATE TABLE Administrador(
 
-	id_Administrador	INT				IDENTITY,
-	nome				VARCHAR(100)	NOT NULL,
-	senha				VARCHAR(100)	NOT NULL,
-	email				VARCHAR(100)	NOT NULL,
-	dataCadastro		SMALLDATETIME	NOT NULL,
-	statusAdministrador	VARCHAR(20)		NOT NULL,
-
-	PRIMARY KEY (id_Administrador)
-)
-GO
-
-INSERT Administrador(nome, email, senha, dataCadastro, statusAdministrador)
-VALUES ('Julia da Silva', 'user1@gmail.com','MTIzNDU2Nzg=', GETDATE(), 'ATIVO')
-
-INSERT Administrador (nome, email, senha, dataCadastro, statusAdministrador)
-VALUES ('José de Oliveira', 'user2gmail.com','MTIzNDU2Nzg=',  GETDATE(), 'INATIVO')
-
-INSERT Administrador(nome, email, senha, dataCadastro, statusAdministrador)
-VALUES ('Carlos de Oliveira', 'user3@gmail.com', 'MTIzNDU2Nzg=', GETDATE(), 'ATIVO')
-
-SELECT * FROM Administrador
 
 GO
 
 CREATE TABLE Empresa(
 	id_Empresa		INT				IDENTITY,
 	nome			VARCHAR(100)	NOT NULL,
-	senha			VARCHAR(100)	NOT NULL,
-	email			VARCHAR(100)	NOT NULL,
 	cnpj			VARCHAR(18)		UNIQUE NOT NULL,
 	endereço		VARCHAR(300)	NOT NULL,
 	dataCadastro	SMALLDATETIME	NOT NULL,
@@ -112,3 +86,5 @@ INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
 VALUES ('Biotec Pharma'), 'MTIzNDU2Nzg=', 'biotecpharma@gmail.com', '98.765.432/0001-10', 'Rua Marechal Deodoro N°490', GETDATE() , 'INATIVO')
 
 SELECT * FROM Empresa
+
+SELECT * FROM Aluno
