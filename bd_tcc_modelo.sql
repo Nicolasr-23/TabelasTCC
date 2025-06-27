@@ -38,14 +38,18 @@ SELECT * FROM Usuario
 
 CREATE TABLE Aluno
 (
-	id	INT			IDENTITY,
+	id				INT			IDENTITY,
+	usuario_id		INT			NOT NULL,
 	nome			VARCHAR(100)	NOT NULL,
-	rm				VARCHAR(100)	UNIQUE NOT NULL,
-
+	rm				VARCHAR(10)		UNIQUE NOT NULL,
+	curso			VARCHAR(20)		NOT NULL,
+	formacao		VARCHAR(20)		NOT NULL, -- DEZEMBRO/2026
+	dataNascimento	DATE			NOT NULL,
 	dataCadastro	SMALLDATETIME	NOT NULL,
 	statusAluno		VARCHAR(20)		NOT NULL,
 
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
 )
 GO
 INSERT Aluno (nome, rm, senha, foto, dataCadastro, statusAluno)
@@ -65,22 +69,29 @@ GO
 GO
 
 CREATE TABLE Empresa(
-	id_Empresa		INT				IDENTITY,
+	id				INT				IDENTITY,
+	usuario_id		INT				NOT NULL,
 	nome			VARCHAR(100)	NOT NULL,
 	cnpj			VARCHAR(18)		UNIQUE NOT NULL,
-	endereço		VARCHAR(300)	NOT NULL,
+	complemento		VARCHAR(300)	NOT NULL,
+	cep				CHAR(8)			NOT NULL,
+	numero			VARCHAR(10)		NOT NULL,
+	webSite			VARCHAR(50)		NULL,
+	telefone		VARCHAR(20)		NOT NULL,
 	dataCadastro	SMALLDATETIME	NOT NULL,
 	statusEmpresa	VARCHAR(20)		NOT NULL,
 
-	PRIMARY KEY (id_Empresa)
+	PRIMARY KEY (id),
+	FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
+
 )
 GO
 
 INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
-VALUES ('InovaTech'), 'MTIzNDU2Nzg=', 'Inovatech@gmail.com', '11.222.333/0001-81', 'Avenida dos Girassóis N°200', GETDATE() , 'INATIVO')
+VALUES ('InovaTech', 'MTIzNDU2Nzg=', 'Inovatech@gmail.com', '11.222.333/0001-81', 'Avenida dos Girassóis N°200', GETDATE() , 'INATIVO')
 
 INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
-VALUES ('CodeStorm'), 'MTIzNDU2Nzg=', 'CodeStorm@gmail.com', '12.345.678/0001-95', 'Rua São Benedito N°384', GETDATE() , 'ATIVO')
+VALUES ('CodeStorm', 'MTIzNDU2Nzg=', 'CodeStorm@gmail.com', '12.345.678/0001-95', 'Rua São Benedito N°384', GETDATE() , 'ATIVO')
 
 INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
 VALUES ('Biotec Pharma'), 'MTIzNDU2Nzg=', 'biotecpharma@gmail.com', '98.765.432/0001-10', 'Rua Marechal Deodoro N°490', GETDATE() , 'INATIVO')
@@ -88,3 +99,61 @@ VALUES ('Biotec Pharma'), 'MTIzNDU2Nzg=', 'biotecpharma@gmail.com', '98.765.432/
 SELECT * FROM Empresa
 
 SELECT * FROM Aluno
+
+CREATE TABLE Vaga(
+ 
+	id				INT		IDENTITY,
+	empresa_id		INT		NOT NULL,
+	nome			VARCHAR(100)	NOT NULL,
+	descricao		VARCHAR(500)	NOT NULL,
+	cidade			VARCHAR(100)	NULL,
+	bairro			VARCHAR(100)	NULL,
+	cargaHoraria	VARCHAR(100)    NULL,
+	salario		    VARCHAR(100)	NULL,
+	area			VARCHAR(100)	NOT NULL,
+	dataCadastro	SMALLDATETIME	NOT NULL,
+	statusVaga		VARCHAR(20)		NOT NULL,
+ 
+	PRIMARY KEY (id),
+	FOREIGN KEY (empresa_id) REFERENCES Empresa(id)
+
+)
+GO
+ 
+INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga, statusVaga)
+VALUES ('Vaga x', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+ 
+INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga)
+VALUES ('Vaga y', 'Desenvolvedor front-end','rua terra 748', '20 horas', '700 reais',  'informatica', '2026-2028', 'INATIVO' )
+ 
+INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga)
+VALUES ('Vaga z', 'Desenvolvedor back-end', 'rua lua 709', '20 horas', '900 reais', 'Edificações', '2025-2027', 'ATIVO')
+ 
+SELECT * FROM Vaga
+ 
+GO
+
+CREATE TABLE PerfilAluno(
+	id				INT			IDENTITY,
+	curso			VARCHAR(20)		NOT NULL,
+	ano				CHAR(1)			NOT NULL,
+	telefone		CHAR(11)		NOT NULL,
+	email			VARCHAR(30)		NOT NULL,
+	experiencia		VARCHAR(1000)	NOT NULL,
+	statusProf		VARCHAR(20)		NOT NULL,
+
+PRIMARY KEY (id)
+
+)
+
+GO
+
+INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+VALUES ('informática', '2', '11 90022000', 'estudante@email.com', 'sem experiência', 'ATIVO')
+
+INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+VALUES ('irformática para Internet', '3', '11 91305000', 'estudante2@email.com', 'Serviço comunitário', 'INATIVO')
+
+INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+VALUES ('Edficações', '1', '11 92496000', 'estudante3@email.com', 'Participação da Olímpiada de informática 2025', 'INATIVO')
+--Descrição, HardSkill, SoftSkill, hisórico.
