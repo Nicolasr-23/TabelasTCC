@@ -87,14 +87,15 @@ CREATE TABLE Empresa(
 )
 GO
 
-INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
+INSERT Empresa (nome, cnpj, complemento, cep, numero, webSite, telefone, dataCadastro, statusEmpresa)
 VALUES ('InovaTech', 'MTIzNDU2Nzg=', 'Inovatech@gmail.com', '11.222.333/0001-81', 'Avenida dos Girassóis N°200', GETDATE() , 'INATIVO')
 
-INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
-VALUES ('CodeStorm', 'MTIzNDU2Nzg=', 'CodeStorm@gmail.com', '12.345.678/0001-95', 'Rua São Benedito N°384', GETDATE() , 'ATIVO')
+INSERT Empresa (nome, cnpj, complemento, cep, numero, webSite, telefone, dataCadastro, statusEmpresa)
+VALUES ('CodeStorm', 'MTIzNDU2Nzg=', 'CodeStorm@gmail.com', '11.222.333/0001-81', 'Avenida dos Girassóis N°200', GETDATE() , 'INATIVO')
 
-INSERT Empresa (nome, senha, email, cnpj, endereço, dataCadastro, statusEmpresa)
-VALUES ('Biotec Pharma'), 'MTIzNDU2Nzg=', 'biotecpharma@gmail.com', '98.765.432/0001-10', 'Rua Marechal Deodoro N°490', GETDATE() , 'INATIVO')
+INSERT Empresa (nome, cnpj, complemento, cep, numero, webSite, telefone, dataCadastro, statusEmpresa)
+VALUES ('Biotec Pharma', 'MTIzNDU2Nzg=', 'Biotechpharma@gmail.com', '11.222.333/0001-81', 'Avenida dos Girassóis N°200', GETDATE() , 'INATIVO')
+
 
 SELECT * FROM Empresa
 
@@ -120,14 +121,15 @@ CREATE TABLE Vaga(
 )
 GO
  
-INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga, statusVaga)
+INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
 VALUES ('Vaga x', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+
+INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
+VALUES ('Vaga y', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+
+INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
+VALUES ('Vaga z', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
  
-INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga)
-VALUES ('Vaga y', 'Desenvolvedor front-end','rua terra 748', '20 horas', '700 reais',  'informatica', '2026-2028', 'INATIVO' )
- 
-INSERT Vaga (nome, descricao, endereco, cargaHoraria, salario, curso, validadeVaga)
-VALUES ('Vaga z', 'Desenvolvedor back-end', 'rua lua 709', '20 horas', '900 reais', 'Edificações', '2025-2027', 'ATIVO')
  
 SELECT * FROM Vaga
  
@@ -148,12 +150,15 @@ PRIMARY KEY (id)
 
 GO
 
-INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
 VALUES ('informática', '2', '11 90022000', 'estudante@email.com', 'sem experiência', 'ATIVO')
 
-INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
 VALUES ('irformática para Internet', '3', '11 91305000', 'estudante2@email.com', 'Serviço comunitário', 'INATIVO')
 
-INSERT PerfilProf(curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
 VALUES ('Edficações', '1', '11 92496000', 'estudante3@email.com', 'Participação da Olímpiada de informática 2025', 'INATIVO')
+
+SELECT * FROM PerfilAluno
+
 --Descrição, HardSkill, SoftSkill, hisórico.
