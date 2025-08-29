@@ -34,12 +34,12 @@ GO
 
 SELECT * FROM Usuario
 
---Tabelas:Aluno, administrador, empresa, vaga, perfil profissional, perfil do escolar.
+--Tabelas:Aluno, administrador, empresa, vaga, perfil do aluno.
 
 CREATE TABLE Aluno
 (
-	id				INT			IDENTITY,
-	usuario_id		INT			NOT NULL,
+	id				INT				IDENTITY,
+	usuario_id		INT				NOT NULL,
 	nome			VARCHAR(100)	NOT NULL,
 	rm				VARCHAR(10)		UNIQUE NOT NULL,
 	curso			VARCHAR(20)		NOT NULL,
@@ -103,8 +103,8 @@ SELECT * FROM Aluno
 
 CREATE TABLE Vaga(
  
-	id				INT		IDENTITY,
-	empresa_id		INT		NOT NULL,
+	id				INT				IDENTITY,
+	empresa_id		INT				NOT NULL,
 	nome			VARCHAR(100)	NOT NULL,
 	descricao		VARCHAR(500)	NOT NULL,
 	cidade			VARCHAR(100)	NULL,
@@ -122,13 +122,13 @@ CREATE TABLE Vaga(
 GO
  
 INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
-VALUES ('Vaga x', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+VALUES ('Vaga x', 'Desenvolvedor web', 'rua Saturno 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
 
 INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
-VALUES ('Vaga y', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+VALUES ('Vaga y', 'Engenheiro de software', 'rua marte 123', '29 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
 
 INSERT Vaga (nome, descricao, cidade,bairro, cargaHoraria, salario, area, statusVaga)
-VALUES ('Vaga z', 'Desenvolvedor web', 'rua marte 123', '30 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
+VALUES ('Vaga z', 'Desenvolvedor web', 'rua Urano 123', '35 horas', '600 reais', 'informática', '2025-2026', 'ATIVO')
  
  
 SELECT * FROM Vaga
@@ -136,13 +136,13 @@ SELECT * FROM Vaga
 GO
 
 CREATE TABLE PerfilAluno(
-	id				INT			IDENTITY,
-	curso			VARCHAR(20)		NOT NULL,
-	ano				CHAR(1)			NOT NULL,
-	telefone		CHAR(11)		NOT NULL,
-	email			VARCHAR(30)		NOT NULL,
-	experiencia		VARCHAR(1000)	NOT NULL,
-	statusProf		VARCHAR(20)		NOT NULL,
+	id					INT				IDENTITY,
+	curso				VARCHAR(20)		NOT NULL,
+	ano					CHAR(1)			NOT NULL,
+	telefone			CHAR(11)		NOT NULL,
+	email				VARCHAR(30)		NOT NULL,
+	experiencia			VARCHAR(1000)	NOT NULL,
+	statusPerfil		VARCHAR(20)		NOT NULL,
 
 PRIMARY KEY (id)
 
@@ -150,15 +150,36 @@ PRIMARY KEY (id)
 
 GO
 
-INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusPerfil)
 VALUES ('informática', '2', '11 90022000', 'estudante@email.com', 'sem experiência', 'ATIVO')
 
-INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusPerfil)
 VALUES ('irformática para Internet', '3', '11 91305000', 'estudante2@email.com', 'Serviço comunitário', 'INATIVO')
 
-INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusProf)
+INSERT PerfilAluno (curso, ano, telefone, email, experiencia, statusPerfil)
 VALUES ('Edficações', '1', '11 92496000', 'estudante3@email.com', 'Participação da Olímpiada de informática 2025', 'INATIVO')
 
 SELECT * FROM PerfilAluno
 
---Descrição, HardSkill, SoftSkill, hisórico.
+CREATE TABLE Administrador(
+	id				INT				IDENTITY,
+	usuario_id		INT				NOT NULL,
+	nome			VARCHAR(100)	NOT NULL,
+	email			VARCHAR(30)		NOT NULL,
+	statusAdmin		VARCHAR(20)		NOT NULL,
+
+	PRIMARY KEY (id)
+
+)
+GO
+
+INSERT Administrador (nome, email, statusAdmin)
+VALUES ('Fulano da Silva', 'fulano@email.com.br', 'ATIVO')
+
+INSERT Administrador (nome, email, statusAdmin)
+VALUES ('João da Silva', 'joao@email.com.br', 'ATIVO')
+
+INSERT Administrador (nome, email, statusAdmin)
+VALUES ('Sicrana da Silva', 'sicrana@email.com.br', 'ATIVO')
+
+SELECT * FROM Administrador
